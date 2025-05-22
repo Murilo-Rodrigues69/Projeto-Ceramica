@@ -3,6 +3,8 @@ package com.ceramicamaster.gerenciador2.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
+import com.ceramicamaster.gerenciador2.entities.enums.EnumLenha;
+
 
 
 
@@ -16,12 +18,13 @@ public class Lenha implements Serializable{
 	private String lenha;
 	private Double medidaLenha;
 	private Double total;
+	private EnumLenha responsavel;
 	
 	public Lenha() {
 		
 	}
 
-	public Lenha(Long id,String fornecedor, String tipo, String lenha, Double medidaLenha, Double total) {
+	public Lenha(Long id,String fornecedor, String tipo, String lenha, Double medidaLenha, Double total, EnumLenha responsavel) {
 		super();
 		this.id =id;
 		this.Fornecedor = fornecedor;
@@ -29,6 +32,7 @@ public class Lenha implements Serializable{
 		this.lenha = lenha;
 		this.medidaLenha = medidaLenha;
 		this.total = total;
+		this.responsavel = responsavel;
 	}
 
 	
@@ -80,11 +84,22 @@ public class Lenha implements Serializable{
 	public void setTotal(Double total) {
 		this.total = total;
 	}
+	
+
+	public EnumLenha getResponsavel() {
+		return responsavel;
+	}
+
+	public void setResponsavel(EnumLenha responsavel) {
+		this.responsavel = responsavel;
+	}
+
+	
 
 	@Override
 	public String toString() {
-		return "Lenha [Fornecedor=" + Fornecedor + ", Tipo=" + Tipo + ", lenha=" + lenha + ", medidaLenha="
-				+ medidaLenha + ", total=" + total + "]";
+		return "Lenha [id=" + id + ", Fornecedor=" + Fornecedor + ", Tipo=" + Tipo + ", lenha=" + lenha
+				+ ", medidaLenha=" + medidaLenha + ", total=" + total + ", responsavel=" + responsavel + "]";
 	}
 
 	@Override

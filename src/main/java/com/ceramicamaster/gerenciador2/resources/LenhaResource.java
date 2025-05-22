@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ceramicamaster.gerenciador2.entities.Lenha;
+import com.ceramicamaster.gerenciador2.entities.enums.EnumLenha;
 
 
 
@@ -19,7 +20,7 @@ public class LenhaResource {
 	
 	@GetMapping
 	public ResponseEntity<Lenha> findAll(){
-		Lenha l = new Lenha(1L, "Jose Maria", "Lenha do mato", "Lenha ruim", 2.77, 1514.98);
+		Lenha l = new Lenha(1L, "Jose Maria", "Lenha do mato", "Lenha ruim", 2.77, 1514.98,EnumLenha.Marcio);
 		return ResponseEntity.ok().body(l);
 	}
 }
