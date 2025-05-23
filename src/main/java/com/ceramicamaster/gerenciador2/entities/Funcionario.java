@@ -1,13 +1,16 @@
 package com.ceramicamaster.gerenciador2.entities;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.Instant;
 import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 
 
 
@@ -21,16 +24,20 @@ public class Funcionario implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
-	private Date dataDeEntrada;
+	private Instant dataDeEntrada;
 	private String pix;
 	private String whatsapp;
 	private double salario;
+	
+	@JsonIgnore
+	@OneToOne(mappedBy = "motorista")
+	private Carregamento motorista;
 	
 	public Funcionario() {
 		
 	}
 
-	public Funcionario(Long id, String nome, Date dataDeEntrada, String pix, String whatsapp, double salario) {
+	public Funcionario(Long id, String nome, Instant dataDeEntrada, String pix, String whatsapp, double salario) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -56,11 +63,11 @@ public class Funcionario implements Serializable {
 		this.nome = nome;
 	}
 
-	public Date getDataDeEntrada() {
+	public Instant getDataDeEntrada() {
 		return dataDeEntrada;
 	}
 
-	public void setDataDeEntrada(Date dataDeEntrada) {
+	public void setDataDeEntrada(Instant dataDeEntrada) {
 		this.dataDeEntrada = dataDeEntrada;
 	}
 
@@ -86,6 +93,13 @@ public class Funcionario implements Serializable {
 
 	public void setSalario(double salario) {
 		this.salario = salario;
+	}
+	public Carregamento getMotorista() {
+		return motorista;
+	}
+
+	public void setMotorista(Carregamento motorista) {
+		this.motorista = motorista;
 	}
 
 	@Override
@@ -113,6 +127,8 @@ public class Funcionario implements Serializable {
 				&& Double.doubleToLongBits(salario) == Double.doubleToLongBits(other.salario)
 				&& Objects.equals(whatsapp, other.whatsapp);
 	}
+
+	
 
 	
 }

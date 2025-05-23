@@ -1,5 +1,6 @@
 package com.ceramicamaster.gerenciador2.resources;
 
+import java.time.Instant;
 import java.util.Date;
 
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ public class FornoResource {
 	
 	@GetMapping
 	public ResponseEntity<Forno> findAll(){
-		Forno f = new Forno(1L, 4, data, data, "Equipe 5");
+		Forno f = new Forno(1L, 4, Instant.now(), Instant.now(), "Equipe 10");
 		return ResponseEntity.ok().body(f);
 	}
 }

@@ -1,6 +1,7 @@
 package com.ceramicamaster.gerenciador2.entities;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Objects;
 
 import com.ceramicamaster.gerenciador2.entities.enums.EnumLenha;
@@ -18,13 +19,14 @@ public class Lenha implements Serializable{
 	private String lenha;
 	private Double medidaLenha;
 	private Double total;
+	private Instant data;
 	private EnumLenha responsavel;
 	
 	public Lenha() {
 		
 	}
 
-	public Lenha(Long id,String fornecedor, String tipo, String lenha, Double medidaLenha, Double total, EnumLenha responsavel) {
+	public Lenha(Long id,String fornecedor, String tipo, String lenha, Double medidaLenha, Double total, EnumLenha responsavel, Instant data) {
 		super();
 		this.id =id;
 		this.Fornecedor = fornecedor;
@@ -33,6 +35,7 @@ public class Lenha implements Serializable{
 		this.medidaLenha = medidaLenha;
 		this.total = total;
 		this.responsavel = responsavel;
+		this.data = data;
 	}
 
 	
@@ -86,6 +89,14 @@ public class Lenha implements Serializable{
 	}
 	
 
+	public Instant getData() {
+		return data;
+	}
+
+	public void setData(Instant data) {
+		this.data = data;
+	}
+
 	public EnumLenha getResponsavel() {
 		return responsavel;
 	}
@@ -96,15 +107,18 @@ public class Lenha implements Serializable{
 
 	
 
+	
+
 	@Override
 	public String toString() {
 		return "Lenha [id=" + id + ", Fornecedor=" + Fornecedor + ", Tipo=" + Tipo + ", lenha=" + lenha
-				+ ", medidaLenha=" + medidaLenha + ", total=" + total + ", responsavel=" + responsavel + "]";
+				+ ", medidaLenha=" + medidaLenha + ", total=" + total + ", data=" + data + ", responsavel="
+				+ responsavel + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(Fornecedor, Tipo, id, lenha, medidaLenha, total);
+		return Objects.hash(Fornecedor, Tipo, data, id, lenha, medidaLenha, responsavel, total);
 	}
 
 	@Override
@@ -117,8 +131,11 @@ public class Lenha implements Serializable{
 			return false;
 		Lenha other = (Lenha) obj;
 		return Objects.equals(Fornecedor, other.Fornecedor) && Objects.equals(Tipo, other.Tipo)
-				&& Objects.equals(id, other.id) && Objects.equals(lenha, other.lenha)
-				&& Objects.equals(medidaLenha, other.medidaLenha) && Objects.equals(total, other.total);
+				&& Objects.equals(data, other.data) && Objects.equals(id, other.id)
+				&& Objects.equals(lenha, other.lenha) && Objects.equals(medidaLenha, other.medidaLenha)
+				&& responsavel == other.responsavel && Objects.equals(total, other.total);
 	}
+
+	
 	
 }

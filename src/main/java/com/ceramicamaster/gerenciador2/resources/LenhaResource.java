@@ -1,6 +1,6 @@
 package com.ceramicamaster.gerenciador2.resources;
 
-import java.util.Date;
+import java.time.Instant;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,11 +16,10 @@ import com.ceramicamaster.gerenciador2.entities.enums.EnumLenha;
 @RequestMapping(value = "/Lenha")
 public class LenhaResource {
 
-	Date data;
 	
 	@GetMapping
 	public ResponseEntity<Lenha> findAll(){
-		Lenha l = new Lenha(1L, "Jose Maria", "Lenha do mato", "Lenha ruim", 2.77, 1514.98,EnumLenha.Marcio);
+		Lenha l = new Lenha(1L, "Joao ricardo", "Lenha do mato", "Ruim", 2.55, 1750.00, EnumLenha.Vilson, Instant.now());
 		return ResponseEntity.ok().body(l);
 	}
 }

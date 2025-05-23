@@ -1,34 +1,48 @@
 package com.ceramicamaster.gerenciador2.entities;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.Instant;
 import java.util.Objects;
 
 import com.ceramicamaster.gerenciador2.entities.enums.EnumCarregamento;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 
+@Entity
 public class Carregamento implements Serializable{
 	private static final long serialVersionUID = 1L;
 
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String motorista;
+	
+	@OneToOne
+	@JoinColumn(name = "motorista_id")
+	private Funcionario motorista;
+	
 	private Integer quantidade;
 	private String medidaDoTijolo;
-	private Date data;
+	private Instant data;
 	private EnumCarregamento responsavel;
 	
 	public Carregamento() {
 		
 	}
 
-	public Carregamento(Long id,String motorista, Integer quantidade, String medidaDoTijolo, Date data, EnumCarregamento responsavel) {
+	public Carregamento(Long id,Integer quantidade, String medidaDoTijolo, Instant data, EnumCarregamento responsavel, Funcionario motorista) {
 		super();
 		this.id = id;
-		this.motorista = motorista;
 		this.quantidade = quantidade;
 		this.medidaDoTijolo = medidaDoTijolo;
 		this.data = data;
 		this.responsavel = responsavel;
+		this.motorista = motorista;
 	}
 	
 	
@@ -41,11 +55,11 @@ public class Carregamento implements Serializable{
 		this.id = id;
 	}
 
-	public String getMotorista() {
+	public Funcionario getMotorista() {
 		return motorista;
 	}
 
-	public void setMotorista(String motorista) {
+	public void setMotorista(Funcionario motorista) {
 		this.motorista = motorista;
 	}
 
@@ -65,11 +79,11 @@ public class Carregamento implements Serializable{
 		this.medidaDoTijolo = medidaDoTijolo;
 	}
 
-	public Date getData() {
+	public Instant getData() {
 		return data;
 	}
 
-	public void setData(Date data) {
+	public void setData(Instant data) {
 		this.data = data;
 	}
 
@@ -79,12 +93,6 @@ public class Carregamento implements Serializable{
 
 	public void setResponsavel(EnumCarregamento responsavel) {
 		this.responsavel = responsavel;
-	}
-
-	@Override
-	public String toString() {
-		return "Carregamento [motorista=" + motorista + ", quantidade=" + quantidade + ", medidaDoTijolo="
-				+ medidaDoTijolo + ", data=" + data + ", responsavel=" + responsavel + "]";
 	}
 
 	@Override
@@ -105,6 +113,14 @@ public class Carregamento implements Serializable{
 				&& Objects.equals(medidaDoTijolo, other.medidaDoTijolo) && Objects.equals(motorista, other.motorista)
 				&& Objects.equals(quantidade, other.quantidade) && responsavel == other.responsavel;
 	}
+
+	@Override
+	public String toString() {
+		return "Carregamento [id=" + id + ", motorista=" + motorista + ", quantidade=" + quantidade
+				+ ", medidaDoTijolo=" + medidaDoTijolo + ", data=" + data + ", responsavel=" + responsavel + "]";
+	}
+
 	
+
 	
 }

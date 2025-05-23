@@ -1,36 +1,31 @@
 package com.ceramicamaster.gerenciador2.entities;
 
 import java.io.Serializable;
+import java.time.Instant;
 
-import java.util.Date;
 import java.util.Objects;
-
-
 
 public class Forno implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	
 	private Long id;
 	private Integer numeroDoForno;
-	private Date dataDeEntrada;
-	private Date dataDeSaida;
-	private String equipeDeForno;
-	
+	private Instant dataDeEntrada;
+	private Instant dataDeSaida;
+	private String equipeForno;
+
 	public Forno() {
-		
+
 	}
 
-	public Forno(Long id,Integer numeroDoForno, Date dataDeEntrada, Date dataDeSaida, String equipeDeForno) {
+	public Forno(Long id, Integer numeroDoForno, Instant dataDeEntrada, Instant dataDeSaida, String equipeForno) {
 		super();
 		this.id = id;
 		this.numeroDoForno = numeroDoForno;
 		this.dataDeEntrada = dataDeEntrada;
 		this.dataDeSaida = dataDeSaida;
-		this.equipeDeForno = equipeDeForno;
+		this.equipeForno = equipeForno;
 	}
-	
-	
 
 	public Long getId() {
 		return id;
@@ -48,39 +43,33 @@ public class Forno implements Serializable {
 		this.numeroDoForno = numeroDoForno;
 	}
 
-	public Date getDataDeEntrada() {
+	public Instant getDataDeEntrada() {
 		return dataDeEntrada;
 	}
 
-	public void setDataDeEntrada(Date dataDeEntrada) {
+	public void setDataDeEntrada(Instant dataDeEntrada) {
 		this.dataDeEntrada = dataDeEntrada;
 	}
 
-	public Date getDataDeSaida() {
+	public Instant getDataDeSaida() {
 		return dataDeSaida;
 	}
 
-	public void setDataDeSaida(Date dataDeSaida) {
+	public void setDataDeSaida(Instant dataDeSaida) {
 		this.dataDeSaida = dataDeSaida;
 	}
 
-	public String getEquipeDeForno() {
-		return equipeDeForno;
+	public String getEquipeForno() {
+		return equipeForno;
 	}
 
-	public void setEquipeDeForno(String equipeDeForno) {
-		this.equipeDeForno = equipeDeForno;
-	}
-
-	@Override
-	public String toString() {
-		return "Forno [numeroDoForno=" + numeroDoForno + ", dataDeEntrada=" + dataDeEntrada + ", dataDeSaida="
-				+ dataDeSaida + ", equipeDeForno=" + equipeDeForno + "]";
+	public void setEquipeForno(String equipeForno) {
+		this.equipeForno = equipeForno;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(dataDeEntrada, dataDeSaida, equipeDeForno, id, numeroDoForno);
+		return Objects.hash(dataDeEntrada, dataDeSaida, equipeForno, id, numeroDoForno);
 	}
 
 	@Override
@@ -93,8 +82,14 @@ public class Forno implements Serializable {
 			return false;
 		Forno other = (Forno) obj;
 		return Objects.equals(dataDeEntrada, other.dataDeEntrada) && Objects.equals(dataDeSaida, other.dataDeSaida)
-				&& Objects.equals(equipeDeForno, other.equipeDeForno) && Objects.equals(id, other.id)
+				&& Objects.equals(equipeForno, other.equipeForno) && Objects.equals(id, other.id)
 				&& Objects.equals(numeroDoForno, other.numeroDoForno);
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Forno [id=" + id + ", numeroDoForno=" + numeroDoForno + ", dataDeEntrada=" + dataDeEntrada
+				+ ", dataDeSaida=" + dataDeSaida + ", equipeForno=" + equipeForno + "]";
+	}
+
 }
