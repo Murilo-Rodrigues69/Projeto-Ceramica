@@ -1,9 +1,10 @@
 package com.ceramicamaster.gerenciador2.entities;
 
 import java.io.Serializable;
-import java.time.Instant;
+import java.time.LocalDate;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
@@ -24,7 +25,10 @@ public class Funcionario implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
-	private Instant dataDeEntrada;
+	
+	@JsonFormat(pattern = "dd-MM-yyyy")
+	private LocalDate dataDeEntrada;
+	
 	private String pix;
 	private String whatsapp;
 	private double salario;
@@ -37,7 +41,7 @@ public class Funcionario implements Serializable {
 		
 	}
 
-	public Funcionario(Long id, String nome, Instant dataDeEntrada, String pix, String whatsapp, double salario) {
+	public Funcionario(Long id, String nome, LocalDate dataDeEntrada, String pix, String whatsapp, double salario) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -63,11 +67,11 @@ public class Funcionario implements Serializable {
 		this.nome = nome;
 	}
 
-	public Instant getDataDeEntrada() {
+	public LocalDate getDataDeEntrada() {
 		return dataDeEntrada;
 	}
 
-	public void setDataDeEntrada(Instant dataDeEntrada) {
+	public void setDataDeEntrada(LocalDate dataDeEntrada) {
 		this.dataDeEntrada = dataDeEntrada;
 	}
 

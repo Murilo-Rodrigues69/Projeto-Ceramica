@@ -1,24 +1,39 @@
 package com.ceramicamaster.gerenciador2.entities;
 
 import java.io.Serializable;
-import java.time.Instant;
-
+import java.time.LocalDate;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class Forno implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private Integer numeroDoForno;
-	private Instant dataDeEntrada;
-	private Instant dataDeSaida;
+	
+	@JsonFormat(pattern = "dd-MM-yyyy")
+	private LocalDate dataDeEntrada;
+	
+	@JsonFormat(pattern = "dd-MM-yyyy")
+	private LocalDate dataDeSaida;
+	
 	private String equipeForno;
 
 	public Forno() {
 
 	}
 
-	public Forno(Long id, Integer numeroDoForno, Instant dataDeEntrada, Instant dataDeSaida, String equipeForno) {
+	public Forno(Long id, Integer numeroDoForno, LocalDate dataDeEntrada, LocalDate dataDeSaida, String equipeForno) {
 		super();
 		this.id = id;
 		this.numeroDoForno = numeroDoForno;
@@ -43,19 +58,19 @@ public class Forno implements Serializable {
 		this.numeroDoForno = numeroDoForno;
 	}
 
-	public Instant getDataDeEntrada() {
+	public LocalDate getDataDeEntrada() {
 		return dataDeEntrada;
 	}
 
-	public void setDataDeEntrada(Instant dataDeEntrada) {
+	public void setDataDeEntrada(LocalDate dataDeEntrada) {
 		this.dataDeEntrada = dataDeEntrada;
 	}
 
-	public Instant getDataDeSaida() {
+	public LocalDate getDataDeSaida() {
 		return dataDeSaida;
 	}
 
-	public void setDataDeSaida(Instant dataDeSaida) {
+	public void setDataDeSaida(LocalDate dataDeSaida) {
 		this.dataDeSaida = dataDeSaida;
 	}
 

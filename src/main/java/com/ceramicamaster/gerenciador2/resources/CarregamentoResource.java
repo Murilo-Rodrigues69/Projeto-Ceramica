@@ -1,8 +1,9 @@
 package com.ceramicamaster.gerenciador2.resources;
-
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,6 +39,13 @@ public class CarregamentoResource {
 		Carregamento obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);
 	}
+	
+	@GetMapping("/data")
+    public ResponseEntity<List<Carregamento>> buscarEntreDatas(
+    		@RequestParam("inicio") @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate inicio,
+    		@RequestParam("fim") @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate fim) {
+        return ResponseEntity.ok(service.buscarPorDataEntre(inicio, fim));
+    }
 	
 	
 

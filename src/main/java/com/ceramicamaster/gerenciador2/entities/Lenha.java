@@ -1,40 +1,51 @@
 package com.ceramicamaster.gerenciador2.entities;
 
 import java.io.Serializable;
-import java.time.Instant;
+import java.time.LocalDate;
 import java.util.Objects;
 
 import com.ceramicamaster.gerenciador2.entities.enums.EnumLenha;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 
 
 
+@Entity
 public class Lenha implements Serializable{
 	private static final long serialVersionUID = 1L;
 
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String Fornecedor;
+	private String fornecedor;
 	private String Tipo;
 	private String lenha;
 	private Double medidaLenha;
 	private Double total;
-	private Instant data;
-	private EnumLenha responsavel;
+	
+	@JsonFormat(pattern = "dd-MM-yyyy")
+	private LocalDate data;
+	
+	private Integer responsavel;
 	
 	public Lenha() {
 		
 	}
 
-	public Lenha(Long id,String fornecedor, String tipo, String lenha, Double medidaLenha, Double total, EnumLenha responsavel, Instant data) {
+	public Lenha(Long id,String fornecedor, String tipo, String lenha, Double medidaLenha, Double total, EnumLenha responsavel, LocalDate data) {
 		super();
 		this.id =id;
-		this.Fornecedor = fornecedor;
+		this.fornecedor = fornecedor;
 		this.Tipo = tipo;
 		this.lenha = lenha;
 		this.medidaLenha = medidaLenha;
 		this.total = total;
-		this.responsavel = responsavel;
+		setResponsavel(responsavel);
 		this.data = data;
 	}
 
@@ -48,12 +59,12 @@ public class Lenha implements Serializable{
 		this.id = id;
 	}
 
-	public String getFornecedor() {
-		return Fornecedor;
+	public String getfornecedor() {
+		return fornecedor;
 	}
 
-	public void setFornecedor(String fornecedor) {
-		Fornecedor = fornecedor;
+	public void setfornecedor(String fornecedor) {
+		this.fornecedor = fornecedor;
 	}
 
 	public String getTipo() {
@@ -89,20 +100,22 @@ public class Lenha implements Serializable{
 	}
 	
 
-	public Instant getData() {
+	public LocalDate getData() {
 		return data;
 	}
 
-	public void setData(Instant data) {
+	public void setData(LocalDate data) {
 		this.data = data;
 	}
 
 	public EnumLenha getResponsavel() {
-		return responsavel;
+		return EnumLenha.valueOff(responsavel);
 	}
 
 	public void setResponsavel(EnumLenha responsavel) {
-		this.responsavel = responsavel;
+		if(responsavel != null) {
+			this.responsavel = responsavel.getCode();
+			}
 	}
 
 	
@@ -111,14 +124,14 @@ public class Lenha implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Lenha [id=" + id + ", Fornecedor=" + Fornecedor + ", Tipo=" + Tipo + ", lenha=" + lenha
+		return "Lenha [id=" + id + ", fornecedor=" + fornecedor + ", Tipo=" + Tipo + ", lenha=" + lenha
 				+ ", medidaLenha=" + medidaLenha + ", total=" + total + ", data=" + data + ", responsavel="
 				+ responsavel + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(Fornecedor, Tipo, data, id, lenha, medidaLenha, responsavel, total);
+		return Objects.hash(fornecedor, Tipo, data, id, lenha, medidaLenha, responsavel, total);
 	}
 
 	@Override
@@ -130,7 +143,7 @@ public class Lenha implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Lenha other = (Lenha) obj;
-		return Objects.equals(Fornecedor, other.Fornecedor) && Objects.equals(Tipo, other.Tipo)
+		return Objects.equals(fornecedor, other.fornecedor) && Objects.equals(Tipo, other.Tipo)
 				&& Objects.equals(data, other.data) && Objects.equals(id, other.id)
 				&& Objects.equals(lenha, other.lenha) && Objects.equals(medidaLenha, other.medidaLenha)
 				&& responsavel == other.responsavel && Objects.equals(total, other.total);

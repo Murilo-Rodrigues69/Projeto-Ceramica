@@ -1,5 +1,6 @@
 package com.ceramicamaster.gerenciador2.repositories;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,4 +15,6 @@ public interface CarregamentoRepositer extends JpaRepository<Carregamento, Long>
 
 	@Query("SELECT c FROM Carregamento c WHERE LOWER(c.motorista.nome) LIKE LOWER(CONCAT('%', :nome, '%'))")
 	List<Carregamento> findByMotoristaNomeContainingIgnoreCase(@Param("nome") String nome);
+	
+	List<Carregamento> findByDataBetween(LocalDate start, LocalDate end);
 }

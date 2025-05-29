@@ -1,10 +1,11 @@
 package com.ceramicamaster.gerenciador2.entities;
 
 import java.io.Serializable;
-import java.time.Instant;
+import java.time.LocalDate;
 import java.util.Objects;
 
 import com.ceramicamaster.gerenciador2.entities.enums.EnumCarregamento;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,20 +29,23 @@ public class Carregamento implements Serializable{
 	
 	private Integer quantidade;
 	private String medidaDoTijolo;
-	private Instant data;
-	private EnumCarregamento responsavel;
+	
+	@JsonFormat(pattern = "dd-MM-yyyy")
+	private LocalDate data;
+	
+	private Integer responsavel;
 	
 	public Carregamento() {
 		
 	}
 
-	public Carregamento(Long id,Integer quantidade, String medidaDoTijolo, Instant data, EnumCarregamento responsavel, Funcionario motorista) {
+	public Carregamento(Long id,Integer quantidade, String medidaDoTijolo, LocalDate data, EnumCarregamento responsavel, Funcionario motorista) {
 		super();
 		this.id = id;
 		this.quantidade = quantidade;
 		this.medidaDoTijolo = medidaDoTijolo;
 		this.data = data;
-		this.responsavel = responsavel;
+		setResponsavel(responsavel);
 		this.motorista = motorista;
 	}
 	
@@ -79,20 +83,22 @@ public class Carregamento implements Serializable{
 		this.medidaDoTijolo = medidaDoTijolo;
 	}
 
-	public Instant getData() {
+	public LocalDate getData() {
 		return data;
 	}
 
-	public void setData(Instant data) {
+	public void setData(LocalDate data) {
 		this.data = data;
 	}
 
 	public EnumCarregamento getResponsavel() {
-		return responsavel;
+		return EnumCarregamento.valueOff(responsavel);
 	}
 
 	public void setResponsavel(EnumCarregamento responsavel) {
-		this.responsavel = responsavel;
+		if(responsavel != null) {
+		this.responsavel = responsavel.getCode();
+		}
 	}
 
 	@Override
