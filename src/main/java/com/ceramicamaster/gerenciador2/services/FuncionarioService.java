@@ -41,4 +41,8 @@ public class FuncionarioService {
 		return repositer.save(obj);
 	}
 	
+	public void delete(Long id) {
+		repositer.deleteById(id);
+	}
+	
 }
