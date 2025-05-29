@@ -45,4 +45,20 @@ public class FuncionarioService {
 		repositer.deleteById(id);
 	}
 	
+	public Funcionario update(Long id, Funcionario obj) {
+		Funcionario entity = repositer.getReferenceById(id);
+		updateData(entity,obj);
+		return repositer.save(entity);
+	}
+
+	private void updateData(Funcionario entity, Funcionario obj) {
+		entity.setNome(obj.getNome());
+		entity.setPix(obj.getPix());
+		entity.setDataDeEntrada(obj.getDataDeEntrada());
+		entity.setWhatsapp(obj.getWhatsapp());
+		entity.setSalario(obj.getSalario());
+		entity.setMotorista(obj.getMotorista());
+		
+	}
+	
 }
