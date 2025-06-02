@@ -8,15 +8,14 @@ import com.ceramicamaster.gerenciador2.entities.enums.EnumLenha;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-
-
-
 @Entity
-public class Lenha implements Serializable{
+public class Lenha implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -27,19 +26,21 @@ public class Lenha implements Serializable{
 	private String lenha;
 	private Double medidaLenha;
 	private Double total;
-	
+
 	@JsonFormat(pattern = "dd-MM-yyyy")
 	private LocalDate data;
-	
-	private Integer responsavel;
-	
+
+	@Enumerated(EnumType.STRING)
+	private EnumLenha responsavel;
+
 	public Lenha() {
-		
+
 	}
 
-	public Lenha(Long id,String fornecedor, String tipo, String lenha, Double medidaLenha, Double total, EnumLenha responsavel, LocalDate data) {
+	public Lenha(Long id, String fornecedor, String tipo, String lenha, Double medidaLenha, Double total,
+			EnumLenha responsavel, LocalDate data) {
 		super();
-		this.id =id;
+		this.id = id;
 		this.fornecedor = fornecedor;
 		this.Tipo = tipo;
 		this.lenha = lenha;
@@ -49,8 +50,6 @@ public class Lenha implements Serializable{
 		this.data = data;
 	}
 
-	
-	
 	public Long getId() {
 		return id;
 	}
@@ -98,7 +97,6 @@ public class Lenha implements Serializable{
 	public void setTotal(Double total) {
 		this.total = total;
 	}
-	
 
 	public LocalDate getData() {
 		return data;
@@ -109,18 +107,12 @@ public class Lenha implements Serializable{
 	}
 
 	public EnumLenha getResponsavel() {
-		return EnumLenha.valueOff(responsavel);
+		return responsavel;
 	}
 
 	public void setResponsavel(EnumLenha responsavel) {
-		if(responsavel != null) {
-			this.responsavel = responsavel.getCode();
-			}
+		this.responsavel = responsavel;
 	}
-
-	
-
-	
 
 	@Override
 	public String toString() {
@@ -149,6 +141,4 @@ public class Lenha implements Serializable{
 				&& responsavel == other.responsavel && Objects.equals(total, other.total);
 	}
 
-	
-	
 }

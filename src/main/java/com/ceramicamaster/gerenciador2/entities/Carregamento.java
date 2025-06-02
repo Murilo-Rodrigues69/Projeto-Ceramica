@@ -8,11 +8,13 @@ import com.ceramicamaster.gerenciador2.entities.enums.EnumCarregamento;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Carregamento implements Serializable{
@@ -23,7 +25,7 @@ public class Carregamento implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "motorista_id")
 	private Funcionario motorista;
 	
@@ -33,7 +35,8 @@ public class Carregamento implements Serializable{
 	@JsonFormat(pattern = "dd-MM-yyyy")
 	private LocalDate data;
 	
-	private Integer responsavel;
+	@Enumerated(EnumType.STRING)
+	private EnumCarregamento responsavel;
 	
 	public Carregamento() {
 		
@@ -91,14 +94,14 @@ public class Carregamento implements Serializable{
 		this.data = data;
 	}
 
+	
+
 	public EnumCarregamento getResponsavel() {
-		return EnumCarregamento.valueOff(responsavel);
+		return responsavel;
 	}
 
 	public void setResponsavel(EnumCarregamento responsavel) {
-		if(responsavel != null) {
-		this.responsavel = responsavel.getCode();
-		}
+		this.responsavel = responsavel;
 	}
 
 	@Override

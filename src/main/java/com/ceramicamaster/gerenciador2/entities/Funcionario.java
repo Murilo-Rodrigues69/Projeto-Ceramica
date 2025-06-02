@@ -2,17 +2,18 @@ package com.ceramicamaster.gerenciador2.entities;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
-
+import jakarta.persistence.OneToMany;
 
 
 
@@ -34,8 +35,8 @@ public class Funcionario implements Serializable {
 	private double salario;
 	
 	@JsonIgnore
-	@OneToOne(mappedBy = "motorista")
-	private Carregamento motorista;
+	@OneToMany(mappedBy = "motorista", cascade = CascadeType.ALL, orphanRemoval = true) 
+	private List<Carregamento> carregamentos; 
 	
 	public Funcionario() {
 		
@@ -98,14 +99,13 @@ public class Funcionario implements Serializable {
 	public void setSalario(double salario) {
 		this.salario = salario;
 	}
-	public Carregamento getMotorista() {
-		return motorista;
+	
+
+	public List<Carregamento> getCarregamentos() {
+		return carregamentos;
 	}
 
-	public void setMotorista(Carregamento motorista) {
-		this.motorista = motorista;
-	}
-
+	
 	@Override
 	public String toString() {
 		return "Funcionario [id=" + id + ", nome=" + nome + ", dataDeEntrada=" + dataDeEntrada + ", pix=" + pix

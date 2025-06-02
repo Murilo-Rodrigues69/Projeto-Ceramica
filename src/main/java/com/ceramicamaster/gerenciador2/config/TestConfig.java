@@ -44,8 +44,8 @@ public class TestConfig  implements CommandLineRunner{
 		Funcionario f1 = new Funcionario(null, "Murilo Oliveira Rodrigues ", LocalDate.parse("26-05-2022", formatter), "61987", "99943", 2500.00);
 		Funcionario f2 = new Funcionario(null, "Francisco Rodrigues ",  LocalDate.parse("26-05-2022", formatter), "6122222987", "111", 2670.00);
 		
-		Carregamento c1 = new Carregamento(null, 7800, "9x19x19",   LocalDate.parse("26-05-2022", formatter), EnumCarregamento.Rodrigo, f2);
-		Carregamento c2 = new Carregamento(null, 5600, "11,5x19x19",   LocalDate.parse("26-05-2022", formatter), EnumCarregamento.Pezinho, f1);
+		Carregamento c1 = new Carregamento(null, 7800, "9x19x19",   LocalDate.parse("26-05-2022", formatter), EnumCarregamento.RODRIGO, f2);
+		Carregamento c2 = new Carregamento(null, 5600, "11,5x19x19",   LocalDate.parse("26-05-2022", formatter), EnumCarregamento.PEZINHO, f1);
 		
 		Forno fo1 = new Forno(null, 2,  LocalDate.parse("26-05-2022", formatter),  LocalDate.parse("26-05-2022", formatter), "Equipe 5");
 		Forno fo2 = new Forno(null, 4,  LocalDate.parse("26-05-2022", formatter),  LocalDate.parse("26-05-2022", formatter), "Equipe 2");

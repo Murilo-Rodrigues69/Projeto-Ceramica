@@ -5,11 +5,14 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.ceramicamaster.gerenciador2.entities.Lenha;
 import com.ceramicamaster.gerenciador2.exceptions.GerenciadorExceptionResolver;
 import com.ceramicamaster.gerenciador2.repositories.LenhaRepositer;
+
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class LenhaService {
@@ -47,5 +50,48 @@ public class LenhaService {
 		}
 
 		return lista;
+	}
+	
+	public Lenha update(Long id, Lenha obj) {
+	    if (id == null) {
+	        throw new GerenciadorExceptionResolver("O campo ID não pode ser nulo.");
+	    }
+
+	    try {
+	        Lenha entity = repositer.getReferenceById(id);
+	        updateData(entity, obj);
+	        return repositer.save(entity);
+	    } catch (EntityNotFoundException e) {
+	        throw new GerenciadorExceptionResolver("Lenha com ID " + id + " não encontrado.");
+	    } catch (IllegalArgumentException e) {
+	        throw new GerenciadorExceptionResolver("Erro ao atualizar Lenha: dados inválidos.");
+	    } catch (Exception e) {
+	        throw new GerenciadorExceptionResolver("Erro inesperado ao atualizar Lenha: " + e.getMessage());
+	    }
+	}
+	private void updateData(Lenha entity, Lenha obj) {
+	    entity.setData(obj.getData());
+	    entity.setfornecedor(obj.getfornecedor());
+	    entity.setLenha(obj.getLenha());
+	    entity.setMedidaLenha(obj.getMedidaLenha());
+	    entity.setResponsavel(obj.getResponsavel());
+	    entity.setTipo(obj.getTipo());
+	    entity.setTotal(obj.getTotal());
+	}
+	public Lenha insert(Lenha Lenha) {
+	    try {
+	        return repositer.save(Lenha);
+	    } catch (Exception e) {
+	        throw new GerenciadorExceptionResolver("Erro ao inserir Lenha: " + e.getMessage());
+	    }
+	}
+	public void delete(Long id) {
+	    try {
+	        repositer.deleteById(id);
+	    } catch (EmptyResultDataAccessException e) {
+	        throw new GerenciadorExceptionResolver("Lenha com ID " + id + " não encontrado.");
+	    } catch (Exception e) {
+	        throw new GerenciadorExceptionResolver("Erro inesperado ao deletar Lenha: " + e.getMessage());
+	    }
 	}
 }
